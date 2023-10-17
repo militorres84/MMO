@@ -12,7 +12,7 @@ var corsOptions = {
     app.use(cors(corsOptions));
 
     app.use(express.json());
-    
+
     app.use(express.urlencoded({ extended: true }));
 
 
@@ -24,6 +24,8 @@ app.get("/", (req, res) => {
         // extraigo solo los datos que necesito, haciendo un mapeo de la api
         const juegosDeseados = data.map(juego => ({
             title: juego.title,
+            genre: juego.genre,
+            release_date: juego.release_date,
             thumbnail: juego.thumbnail,
             short_description: juego.short_description,
             publisher: juego.publisher
