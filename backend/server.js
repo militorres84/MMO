@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+require("./app/routes/games.routes.js")(app);
 const PORT = process.env.PORT || 5000;
 
 /* El origen que se permitirá acceder a los recursos del servidor a través de CORS
@@ -22,16 +23,18 @@ app.get("/", (req, res) => {
     .then(response => response.json())
     .then(data => {
         // extraigo solo los datos que necesito, haciendo un mapeo de la api
-        const juegosDeseados = data.map(juego => ({
-            title: juego.title,
-            genre: juego.genre,
-            release_date: juego.release_date,
-            thumbnail: juego.thumbnail,
-            short_description: juego.short_description,
-            publisher: juego.publisher
+        const gamesArr = data.map(game => ({
+            title: game.title,
+            genre: game.genre,
+            release_date: game.release_date,
+            thumbnail: game.thumbnail,
+            short_description: game.short_description,
+            publisher: game.publisher
         }));
-        // imprimo en pantalla los datos que extraje de la api
-        res.json(juegosDeseados);
+        // Limito el número de resultados a 25
+        const limitedGames = gamesArr.slice(0, 25);
+        
+        res.json(limitedGames);
     })
     // 
     .catch(error => {
