@@ -1,13 +1,13 @@
-const Tutorial = require("../models/games.model.js");
+const Games = require("../models/games.model.js");
 
 // Crear un guardar un nuevo juego
 exports.create = (req, res) => {
-    console.log(req);
     // Validate request
     if (!req.body) {
         res.status(400).send({
         message: "Content can not be empty!"
         });
+        console.log(res);
     }
 
     // Crear un juego
