@@ -11,11 +11,8 @@ var corsOptions = {
     };
 
     app.use(cors(corsOptions));
-
     app.use(express.json());
-
     app.use(express.urlencoded({ extended: true }));
-
 
 // Consumo de API MMOBomb
 app.get("/", (req, res) => {
@@ -42,8 +39,9 @@ app.get("/", (req, res) => {
         res.status(500).json({ error: "No se pudieron obtener los datos de la API." });
     });
 });
-
-require("./app/routes/games.routes.js")(app);
+// Importacion de Rutas
+const games = require("./app/routes/games.routes.js"); 
+app.use("/", games); // Ruta Raiz para Juegos
 
 app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);

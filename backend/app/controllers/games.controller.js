@@ -10,15 +10,8 @@ exports.create = (req, res) => {
         console.log(res);
     }
 
-    // Crear un juego
-    const games = new Game({
-        title: req.body.title,
-        genre: req.body.genre,
-        release_date: req.body.release_date,
-        thumbnail: req.body.thumbnail,
-        short_description: req.body.description,
-        publisher: req.body.publisher || false
-    });
+    // Crear un juego)
+    const games = new Games(req.body); // SIMPLIFICACION DE OBJETO
 
     // Guardar el juego en la db
     Games.create(games, (err, data) => {
