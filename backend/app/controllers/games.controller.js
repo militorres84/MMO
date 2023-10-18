@@ -10,14 +10,17 @@ exports.create = (req, res) => {
     }
 
     // Create a Tutorial
-    const tutorial = new Tutorial({
+    const game = new Game({
         title: req.body.title,
-        description: req.body.description,
-        published: req.body.published || false
+        genre: req.body.genre,
+        release_date: req.body.release_date,
+        thumbnail: req.body.thumbnail,
+        short_description: req.body.description,
+        publisher: req.body.publisher || false
     });
 
     // Save Tutorial in the database
-    Tutorial.create(tutorial, (err, data) => {
+    Game.create(game, (err, data) => {
         if (err)
         res.status(500).send({
             message:
