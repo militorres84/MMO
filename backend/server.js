@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-require("./app/routes/games.routes.js")(app);
+
 const PORT = process.env.PORT || 5000;
 
 /* El origen que se permitirá acceder a los recursos del servidor a través de CORS
     este recurso es un objeto */
 var corsOptions = {
-    origin: "http://localhost:5000"
+    origin: "http://localhost:8081"
     };
 
     app.use(cors(corsOptions));
@@ -42,6 +42,8 @@ app.get("/", (req, res) => {
         res.status(500).json({ error: "No se pudieron obtener los datos de la API." });
     });
 });
+
+require("./app/routes/games.routes.js")(app);
 
 app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);

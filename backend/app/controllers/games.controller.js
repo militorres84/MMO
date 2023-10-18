@@ -1,7 +1,8 @@
 const Tutorial = require("../models/games.model.js");
 
-// Create and Save a new Tutorial
+// Crear un guardar un nuevo juego
 exports.create = (req, res) => {
+    console.log(req);
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -9,8 +10,8 @@ exports.create = (req, res) => {
         });
     }
 
-    // Create a Tutorial
-    const game = new Game({
+    // Crear un juego
+    const games = new Game({
         title: req.body.title,
         genre: req.body.genre,
         release_date: req.body.release_date,
@@ -19,8 +20,8 @@ exports.create = (req, res) => {
         publisher: req.body.publisher || false
     });
 
-    // Save Tutorial in the database
-    Game.create(game, (err, data) => {
+    // Guardar el juego en la db
+    Games.create(games, (err, data) => {
         if (err)
         res.status(500).send({
             message:
